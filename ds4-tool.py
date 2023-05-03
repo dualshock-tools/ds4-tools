@@ -215,7 +215,7 @@ class Handlers:
         self.__dev.hid_set_report(0xa1, raw)
 
     def get_serial_number(self, args):
-        pass
+        print('get_serial_number() isn\'t implemented yet')
         # Read byte 0x700
         #self.__dev.hid_set_report(0x08, struct.pack('>BH', 0xff, 0x700))
         #status = self.__dev.hid_get_report(0x11, 2)
