@@ -227,5 +227,5 @@ if __name__ == "__main__":
             sys.exit('Could not detatch kernel driver: %s' % str(e))
 
     if dev != None:
-        print("Dualshock4 online!")
+        print("DualShock 4 online!")
         menu()

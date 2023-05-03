@@ -122,7 +122,7 @@ class Handlers:
 
     def get_bt_mac_addr(self, args):
         ds4_mac = self.__dev.hid_get_report(0x81, 8)
-        ds4_mac_str = "%x:%x:%x:%x:%x:%x" % struct.unpack("BBBBBB",ds4_mac) 
+        ds4_mac_str = "%02x:%02x:%02x:%02x:%02x:%02x" % struct.unpack("BBBBBB", ds4_mac)
         print("DS4 MAC: %s" % (ds4_mac_str, ))
 
     def set_bt_mac_addr(self, args):
@@ -134,8 +134,8 @@ class Handlers:
         buf = self.__dev.hid_get_report(0x12, 6 + 3 + 6)
         ds4_mac, unk, host_mac = buf[0:6], buf[6:9], buf[9:15]
         assert unk == b'\x08\x25\x00'
-        ds4_mac_str = "%x:%x:%x:%x:%x:%x" % struct.unpack("BBBBBB",ds4_mac) 
-        host_mac_str = "%x:%x:%x:%x:%x:%x" % struct.unpack("BBBBBB",host_mac) 
+        ds4_mac_str = "%02x:%02x:%02x:%02x:%02x:%02x" % struct.unpack("BBBBBB", ds4_mac)
+        host_mac_str = "%02x:%02x:%02x:%02x:%02x:%02x" % struct.unpack("BBBBBB", host_mac)
         print("DS4 MAC: %s" % (ds4_mac_str, ))
         print("Host MAC: %s" % (host_mac_str, ))
 
@@ -153,7 +153,7 @@ class Handlers:
         assert len(host_addr) == 6
         assert len(link_key) == 16
 
-        host_addr_str = "%x:%x:%x:%x:%x:%x" % struct.unpack("BBBBBB",host_addr) 
+        host_addr_str = "%02x:%02x:%02x:%02x:%02x:%02x" % struct.unpack("BBBBBB", host_addr)
         link_key_str  = binascii.hexlify(link_key).decode('utf-8')
 
         print("Setting host_addr=%s link_key=%s" % (host_addr_str, link_key_str))
@@ -215,7 +215,7 @@ class Handlers:
         self.__dev.hid_set_report(0xa1, raw)
 
     def get_serial_number(self, args):
-        pass
+        print('get_serial_number() isn\'t implemented yet')
         # Read byte 0x700
         #self.__dev.hid_set_report(0x08, struct.pack('>BH', 0xff, 0x700))
         #status = self.__dev.hid_get_report(0x11, 2)
@@ -254,7 +254,7 @@ p.set_defaults(func=handlers.reset)
 p = subparsers.add_parser('get-bt-mac-addr', help="Get the Bluetooth MAC Address")
 p.set_defaults(func=handlers.get_bt_mac_addr)
 
-p = subparsers.add_parser('set-bt-mac-addr', help="Get the Bluetooth MAC Address")
+p = subparsers.add_parser('set-bt-mac-addr', help="Set the Bluetooth MAC Address")
 p.add_argument('new_mac_addr', help="New MAC address to store")
 p.set_defaults(func=handlers.set_bt_mac_addr)
 
