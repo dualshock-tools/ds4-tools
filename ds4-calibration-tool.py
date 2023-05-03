@@ -220,7 +220,7 @@ if __name__ == "__main__":
     wait_for_device()
 
     # Detach kernel driver
-    if dev.is_kernel_driver_active(0):
+    if sys.platform != 'win32' and dev.is_kernel_driver_active(0):
         try:
             dev.detach_kernel_driver(0)
         except usb.core.USBError as e:
