@@ -27,7 +27,7 @@ class DS4:
     def __init__(self):
         self.device_id = self.DEV_ID_JEDI
         self.wait_for_device(self.device_id)
-        if self.__dev.is_kernel_driver_active(0):
+        if sys.platform != 'win32' and self.__dev.is_kernel_driver_active(0):
             try:
                 self.__dev.detach_kernel_driver(0)
             except usb.core.USBError as e:
