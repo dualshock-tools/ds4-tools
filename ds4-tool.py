@@ -254,7 +254,7 @@ p.set_defaults(func=handlers.reset)
 p = subparsers.add_parser('get-bt-mac-addr', help="Get the Bluetooth MAC Address")
 p.set_defaults(func=handlers.get_bt_mac_addr)
 
-p = subparsers.add_parser('set-bt-mac-addr', help="Get the Bluetooth MAC Address")
+p = subparsers.add_parser('set-bt-mac-addr', help="Set the Bluetooth MAC Address")
 p.add_argument('new_mac_addr', help="New MAC address to store")
 p.set_defaults(func=handlers.set_bt_mac_addr)
 
