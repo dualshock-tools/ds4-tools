@@ -19,27 +19,31 @@ class HID_REQ:
     GET_REPORT = 0x01
     SET_REPORT = 0x09
 
+VALID_DEVICE_IDS = [
+    (0x054c, 0x05c4),
+    (0x054c, 0x09cc)
+]
+
 class DS4:
-    DEV_ID_JEDI = (0x054c, 0x09cc)
-    #DEV_ID_JEDI = (0x054c, 0x05c4)
-    #DEV_ID_UJEDI = (0x054c, 0x0856)
 
     def __init__(self):
-        self.device_id = self.DEV_ID_JEDI
-        self.wait_for_device(self.device_id)
+        self.wait_for_device()
+
         if sys.platform != 'win32' and self.__dev.is_kernel_driver_active(0):
             try:
                 self.__dev.detach_kernel_driver(0)
             except usb.core.USBError as e:
                 sys.exit('Could not detatch kernel driver: %s' % str(e))
 
-    def wait_for_device(self, dev_id):
-        print("[+] Waiting for device VendorId=%04x ProductId=%04x" % dev_id)
-    
-        self.__dev = usb.core.find(idVendor=dev_id[0], idProduct=dev_id[1])
-        while self.__dev is None:
+    def wait_for_device(self):
+        print("Waiting for a DualShock 4...")
+        while True:
+            for i in VALID_DEVICE_IDS:
+                self.__dev = usb.core.find(idVendor=i[0], idProduct=i[1])
+                if self.__dev is not None:
+                    print("Found a DualShock 4: vendorId=%04x productId=%04x" % (i[0], i[1]))
+                    return
             time.sleep(1)
-            self.__dev = usb.core.find(idVendor=dev_id[0], idProduct=dev_id[1])
     
     def hid_get_report(self, report_id, size):
         dev = self.__dev
@@ -117,7 +121,7 @@ class Handlers:
             self.__dev.hid_set_report(0xa0, struct.pack('BBB', 4, 1, 0))
         except usb.core.USBError as e:
             # Reset worked
-            self.__dev.wait_for_device(self.__dev.device_id)
+            self.wait_for_device()
             print("Reset completed")
 
     def get_bt_mac_addr(self, args):
