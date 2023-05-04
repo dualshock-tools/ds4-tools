@@ -19,7 +19,6 @@ of your DS4 w.r.t mine can lead to bricking it.
 ## How to use them
 
 1. Clone the repo and go into the directory
-
 ```
 $ git clone <repo link>
 $ cd ds4-tools
@@ -49,4 +48,23 @@ sw_ver:00000001.a00a sw_series:2010
 code size:0002a000
 
 ```
+
+## Note for a Windows users
+
+The tools won't detect your DualShock 4 until you change default driver to the libusb one.
+
+The easiest way to do this is to use the [Zadig](https://zadig.akeo.ie/ "Zadig's Homepage") software.
+
+1. Download and run Zadig
+
+2. Open `Options` menu and check `List All Devices` item
+![zadig_setup.png](img/zadig_setup.png)
+
+3. Select your DualShock 4 from list and change the driver to libusb-win32 one
+  * `Wireless Controller` [054c:05c4] for the 1st revision
+  ![zadig_ds4r1.png](img/zadig_ds4r1.png)
+  * `Wireless Controller (Interface 0)` [054c:09cc:00] for the 2nd revision
+  ![zadig_ds4r2.png](img/zadig_ds4r2.png)
+
+4. Press `Replace Driver` button and agree with every other question (if any)
 
