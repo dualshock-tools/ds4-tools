@@ -101,6 +101,8 @@ class Handlers:
         
         def dump_flash_mirror(path):
             # TODO can't correctly calc checksum for some reason
+            if sys.platform == 'win32':
+                path = path.translate({ord(i): None for i in '*<>?:|'})
             print('Dumping flash mirror to %s...' % (path))
             with open(path, 'wb') as f:
                 for i in range(0, 0x800, 2):
