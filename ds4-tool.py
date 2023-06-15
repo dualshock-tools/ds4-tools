@@ -237,8 +237,7 @@ class Handlers:
 ds4 = DS4()
 handlers = Handlers(ds4)
 
-parser = argparse.ArgumentParser(prog='ds4-util',
-                                 description="Play with the DS4 controller",
+parser = argparse.ArgumentParser(description="Play with the DS4 controller",
                                  epilog="By the_al")
 
 subparsers = parser.add_subparsers(dest="action")

@@ -49,7 +49,35 @@ code size:0002a000
 
 ```
 
-## Note for a Windows users
+## DS4 Calibration
+
+If you are here, there are good probabilities you want to recalibrate your DS4.
+In that case, the script for you is `ds4-calibration-tool.py`.
+
+The DS4 by default will undo changes after a reset or after it goes in standby.
+This is good to test calibration and see if the result is good enough for you
+without messing everything up.
+
+At some point you may want to make changes permanent. To do that, you
+should change the flash-mirror status using ds4-tool. 
+I suggest to switch back to temporary right after the calibration is done.
+
+Here it follows an example:
+```
+# 1. Know if changes are temporary or permanent (0: permanent; 1: temporary)
+$ ./ds4-tool.py get-flash-mirror-status 
+
+# 2. Change flash mirror behavior to permanent
+$ ./ds4-tool.py set-flash-mirror-status 0
+
+# 3. Do calibration here
+$ ./ds4-calibration-tool.py
+
+# 4. Change flash mirror behavior back to temporary
+$ ./ds4-tool.py set-flash-mirror-status 1
+```
+
+## Notes for Windows
 
 The tools won't detect your DualShock 4 until you change default driver to the libusb one.
 
@@ -68,3 +96,13 @@ The easiest way to do this is to use the [Zadig](https://zadig.akeo.ie/ "Zadig's
 
 4. Press `Replace Driver` button and agree with every other question (if any)
 
+## Notes for Mac OS X
+
+If you get `usb.core.NoBackendError: No backend available` error, you should
+install `libusb`.
+
+Using Homebrew you can install all required tools with this command:
+
+```
+$ brew install git python virtualenv libusb
+```
