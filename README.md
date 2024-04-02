@@ -49,7 +49,7 @@ code size:0002a000
 
 ```
 
-## DS4 Calibration
+## DualShock4 Calibration
 
 If you are here, there are good probabilities you want to recalibrate your DS4.
 In that case, the script for you is `ds4-calibration-tool.py`.
@@ -76,6 +76,28 @@ $ ./ds4-calibration-tool.py
 # 4. Change flash mirror behavior back to temporary
 $ ./ds4-tool.py set-flash-mirror-status 1
 ```
+
+## DualSense Calibration
+The script `ds5-calibration-tool.py` is an experimental script to calibrate your DualSense.
+
+Experimental means:
+* Tested only on my DualSense with an old firmware ("Dec 16 2022 02:44:31")
+* May brick your controller
+* Be aware that it may behave differently with a future firmware update
+
+The command-line interface is different than the DS4 tool, sorry for this.
+With this script, the action is passed by parameter, so that it can be called by other scripts.
+
+The script can be used in two ways:
+* Calibrate center: `./ds5-calibration-tool.py analog-center`
+* Calibrate range: `./ds5-calibration-tool.py analog-range`
+In this way you can try the script, but the changes are gone after a reset.
+
+To calibrate and store the changes permanently, use the parameter `-p`:
+* Calibrate center: `./ds5-calibration-tool.py -p analog-center`
+* Calibrate range: `./ds5-calibration-tool.py -p analog-range`
+
+Let me know if this works.
 
 ## Notes for Windows
 
