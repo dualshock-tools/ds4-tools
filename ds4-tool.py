@@ -33,7 +33,7 @@ class DS4:
             try:
                 self.__dev.detach_kernel_driver(0)
             except usb.core.USBError as e:
-                sys.exit('Could not detatch kernel driver: %s' % str(e))
+                sys.exit('Could not detach kernel driver: %s' % str(e))
 
     def wait_for_device(self):
         print("Waiting for a DualShock 4...")
@@ -289,11 +289,11 @@ p.add_argument('temporary', type=int, help="Set if changes in configuration are 
 p.set_defaults(func=handlers.set_flash_mirror_status)
 
 # GET PCBA Id + SET PCBA Id
-p = subparsers.add_parser('get-pcba-id', help="Get the PCBA manifacturer ID")
+p = subparsers.add_parser('get-pcba-id', help="Get the PCBA manufacturer ID")
 p.set_defaults(func=handlers.get_pcba_id)
 
-p = subparsers.add_parser('set-pcba-id', help="Change the PCBA manifacturer ID")
-p.add_argument('data', help="New manifacturer ID (6 bytes)")
+p = subparsers.add_parser('set-pcba-id', help="Change the PCBA manufacturer ID")
+p.add_argument('data', help="New manufacturer ID (6 bytes)")
 p.set_defaults(func=handlers.set_pcba_id)
 
 # "BT ENABLE"

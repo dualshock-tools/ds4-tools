@@ -112,7 +112,7 @@ if __name__ == "__main__":
     parser.add_argument('-p', '--permanent', help="make changes permanent", action='store_true')
     subparsers = parser.add_subparsers(dest="action")
 
-    p = subparsers.add_parser('analog-center', help="calibrate the center the analog sticks")
+    p = subparsers.add_parser('analog-center', help="calibrate the center of analog sticks")
     p.set_defaults(func=do_stick_center_calibration)
 
     p = subparsers.add_parser('analog-range', help="calibrate the range of analog sticks")
@@ -130,7 +130,7 @@ if __name__ == "__main__":
         try:
             dev.detach_kernel_driver(0)
         except usb.core.USBError as e:
-            sys.exit('Could not detatch kernel driver: %s' % str(e))
+            sys.exit('Could not detach kernel driver: %s' % str(e))
 
     if dev == None:
         print("Cannot find a DualSense")
