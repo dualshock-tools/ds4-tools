@@ -224,7 +224,7 @@ if __name__ == "__main__":
         try:
             dev.detach_kernel_driver(0)
         except usb.core.USBError as e:
-            sys.exit('Could not detatch kernel driver: %s' % str(e))
+            sys.exit('Could not detach kernel driver: %s' % str(e))
 
     if dev != None:
         print("DualShock 4 online!")
